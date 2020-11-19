@@ -3,7 +3,7 @@ Mobility_Survey<-read.csv("A:/Transportation Data Analytics/Term Project/Citywid
 summary(Mobility_Survey)
 
 Survey_Results<-subset(Mobility_Survey, select=-c(qDAY1TRIPTRAVELCODE24,qDAY1TRIPTRAVELCODE25,qDAY1TRIPTRAVELCODE26,qDAY1TRIPTRAVELCODE27,qDAY1TRIPTRANSITTO7,qDAY1TRIPTRANSITFROM7,qDISABILITY9,qWELFARE5,qshare8)) #Removes all variables coded as "refused response"
-is.na(Survey_Results) #view any NA results; add to subset removal
+#is.na(Survey_Results) #view any NA results; add to subset removal
 Survey_Results<-subset(Mobility_Survey, select=-c(qDAY1TRIPTRAVELCODE24,qDAY1TRIPTRAVELCODE25,qDAY1TRIPTRAVELCODE26,qDAY1TRIPTRAVELCODE27,qDAY1TRIPTRANSITTO7,qDAY1TRIPTRANSITFROM7,qDISABILITY9,qWELFARE5,qshare8,qday1typical,NTACODE_HOME,qDAY1TRIPSTARTAM,qDAY1TRIPSTARTNOON,qDAY1TRIPSTARTPM,qDAY1TRIP_OUTSIDENYC_START,qNTACODE_START,qNTACODE_END,qDAY1TRIPPARKPAY,qDAY1TRIPPARKPAY_AMOUNT,qDAY1TRIPBIKESTORE,qDAY1TRIPPARK,qDAY1TRIP_OUTSIDENYC_END,qDAY1TRIPTRANSITTO1,qDAY1TRIPTRANSITTO2,qDAY1TRIPTRANSITTO3,qDAY1TRIPTRANSITTO4, qDAY1TRIPTRANSITTO5,qDAY1TRIPTRANSITTO6,qDAY1TRIPTRANSITFROM1,qDAY1TRIPTRANSITFROM2,qDAY1TRIPTRANSITFROM3,qDAY1TRIPTRANSITFROM4,qDAY1TRIPTRANSITFROM5,qDAY1TRIPTRANSITFROM6)) #Removes Variables with High Amount of NA's (Contradictory and not relevent to model)
 Survey_Results<-na.omit(Survey_Results)
 summary(Survey_Results)
@@ -161,4 +161,23 @@ for (i in 1:nrow(Survey_Analysis)){
 }
 Survey_Analysis<-subset(Survey_Analysis,select=-c(qDAY1TRIPTRAVELCODE15,qDAY1TRIPTRAVELCODE16,qDAY1TRIPTRAVELCODE21,qDAY1TRIPTRAVELCODE22,qDAY1TRIPTRAVELCODE23))
 Survey_Analysis<-subset(Survey_Analysis,select=-c(qDAY1TRIPTRAVELCODE05,qDAY1TRIPTRAVELCODE10)) #Irrelevant Modes to Research
+
+#Converting the variable Race into a factor variable 
+unique(Survey_Analysis$qRACE)
+class(Survey_Analysis[, "race"])
+class(Survey_Analysis[, "qINCOME"])
+frace<- factor(Survey_Analysis[,"qRACE",drop= FALSE])
+race = factor(Survey_Analysis$qRACE,labels=c("1","2","3","4","5","6","7","8"))
+Survey_Analysis<- cbind.data.frame(Survey_Analysis,race)
+Survey_Analysis<- within.data.frame(Survey_Analysis,{rm(qRACE,race)})
+
+#Converting the variable qIncome into a categorical variable
+unique(Survey_Analysis$qINCOME)
+
+fincome<- factor(Survey_Analysis[,"qINCOME"])
+table(Survey_Analysis$qINCOME)
+income= factor(Survey_Analysis$qINCOME,labels= c("1","2","3","4","5","6","7","8","9","10"))
+Survey_Analysis<- cbind.data.frame(Survey_Analysis,income)
+
+write.csv(Survey_Analysis, "A:/Transportation Data Analytics/Term Project/Survey_Analysis.csv")
 
