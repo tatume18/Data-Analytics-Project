@@ -126,6 +126,20 @@ names(Survey_Analysis)[17]<-"RideHail"
 names(Survey_Analysis)[18]<-"RideShare"
 names(Survey_Analysis)[19]<-"CarService"
 names(Survey_Analysis)[20]<-"DollarVan"
+names(Survey_Analysis)[24]<-"TripPurpose"
+names(Survey_Analysis)[25]<-"TripLength"
+names(Survey_Analysis)[26]<-"Gender"
+names(Survey_Analysis)[27]<-"Income"
+names(Survey_Analysis)[28]<-"Age"
+names(Survey_Analysis)[29]<-"Race"
+names(Survey_Analysis)[30]<-"Hispanic"
+names(Survey_Analysis)[31]<-"Education"
+names(Survey_Analysis)[32]<-"LicenseAccess"
+names(Survey_Analysis)[33]<-"CarAccess"
+names(Survey_Analysis)[34]<-"TempLow"
+names(Survey_Analysis)[35]<-"TempHigh"
+names(Survey_Analysis)[36]<-"Precipitation"
+names(Survey_Analysis)[37]<-"Mode"
 
 #Group Variables that Fall in Same Category 
 Survey_Analysis['Ferry']<-'0'
@@ -179,76 +193,6 @@ table(Survey_Analysis$qINCOME)
 income= factor(Survey_Analysis$qINCOME,labels= c("1","2","3","4","5","6","7","8","9","10"))
 Survey_Analysis<- cbind.data.frame(Survey_Analysis,income)
 
-Lwalk<-factor(Survey_Analysis$Walk)
-table(Survey_Analysis$Walk)
-Lwalk<-factor(Survey_Analysis$Walk, labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,Lwalk)
-
-Lsubway<- factor(Survey_Analysis$Subway)
-table(Survey_Analysis$Subway)
-Lsubway<- factor(Survey_Analysis$Subway,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,Lsubway)
-
-lLocalBus<- factor(Survey_Analysis$LocalBus)
-table(Survey_Analysis$LocalBus)
-lLocalBus<- factor(Survey_Analysis$LocalBus,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,lLocalBus)
-
-Lbrt<- factor(Survey_Analysis$BRT)
-table(Survey_Analysis$BRT)
-Lbrt<- factor(Survey_Analysis$BRT,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,Lbrt)
-
-LTrain<- factor(Survey_Analysis$Train)
-table(Survey_Analysis$Train)
-LTrain<- factor(Survey_Analysis$Train,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LTrain)
-
-LCommuterRail<- factor(Survey_Analysis$CommuterRail)
-table(Survey_Analysis$CommuterRail)
-LCommuterRail<- factor(Survey_Analysis$CommuterRail,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LCommuterRail)
-
-
-LPersonal_Car<- factor(Survey_Analysis$PersonalCar)
-table(Survey_Analysis$PersonalCar)
-LPersonal_Car<- factor(Survey_Analysis$PersonalCar,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LPersonal_Car)
-
-LCar_Share<- factor(Survey_Analysis$CarShare)
-table(Survey_Analysis$CarShare)
-LCar_Share<- factor(Survey_Analysis$CarShare,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LCar_Share)
-
-LCar_pool<- factor(Survey_Analysis$Carpool)
-table(Survey_Analysis$Carpool)
-LCar_pool<- factor(Survey_Analysis$Carpool,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LCar_pool)
-
-LMotor_Cycle<- factor(Survey_Analysis$Motorcycle)
-table(Survey_Analysis$Motorcycle)
-LMotor_Cycle<- factor(Survey_Analysis$Motorcycle,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LMotor_Cycle)
-
-LRideHail<- factor(Survey_Analysis$RideHail)
-table(Survey_Analysis$RideHail)
-LRideHail<- factor(Survey_Analysis$RideHail,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LRideHail)
-
-LRideShare<- factor(Survey_Analysis$RideShare)
-table(Survey_Analysis$RideShare)
-LRideShare<- factor(Survey_Analysis$RideShare,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LRideShare)
-
-LCarService<- factor(Survey_Analysis$CarService)
-table(Survey_Analysis$CarService)
-LCarService<- factor(Survey_Analysis$CarService,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LCarService)
-
-
-table(Survey_Analysis$DollarVan)
-Survey_Analysis<- within.data.frame(Survey_Analysis,{rm(DollarVan)})
-
 Trip_Purpose<- factor(Survey_Analysis$qDAY1TRIPPURPOSE)
 table(Survey_Analysis$qDAY1TRIPPURPOSE)
 Trip_Purpose<- factor(Survey_Analysis$qDAY1TRIPPURPOSE,labels = c("1","2","3","4","5","6","7","8","9","10","11"))
@@ -279,11 +223,6 @@ table(Survey_Analysis$qEDUCATION)
 Education<- factor(Survey_Analysis$qEDUCATION,labels = c("1","2","3","4","5","6","7","8"))
 Survey_Analysis<- cbind.data.frame(Survey_Analysis,Education)
 
-LicenseAccess<- factor(Survey_Analysis$qLICENSE)
-table(Survey_Analysis$qLICENSE)
-LicenseAccess<- factor(Survey_Analysis$qLICENSE,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,LicenseAccess)
-
 Car_Access<- factor(Survey_Analysis$qCARACCESS)
 table(Survey_Analysis$qCARACCESS)
 Car_Access<- factor(Survey_Analysis$qCARACCESS,labels = c("1","2","3","4"))
@@ -293,21 +232,6 @@ Mode_Grouping<- factor(Survey_Analysis$qModeGrouping)
 table(Survey_Analysis$qModeGrouping)
 Mode_Grouping<- factor(Survey_Analysis$qModeGrouping,labels = c("1","2","3","4","5","6","7","8","9"))
 Survey_Analysis<- cbind.data.frame(Survey_Analysis,Mode_Grouping)
-
-IsDisable<- factor(Survey_Analysis$Disability)
-table(Survey_Analysis$Disability)
-IsDisable<- factor(Survey_Analysis$Disability,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,IsDisable)
-
-How_Welfare<- factor(Survey_Analysis$Welfare)
-table(Survey_Analysis$Welfare)
-How_Welfare<- factor(Survey_Analysis$Welfare,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,How_Welfare)
-
-How_Welfare<- factor(Survey_Analysis$Welfare)
-table(Survey_Analysis$Welfare)
-How_Welfare<- factor(Survey_Analysis$Welfare,labels = c("1","2"))
-Survey_Analysis<- cbind.data.frame(Survey_Analysis,How_Welfare)
 
 barplot(table(Survey_Analysis$qDAY1TRIPPURPOSE),space=1,beside = T,col =1:11, 
         main="Trip Purpose", cex.names = 0.8)
